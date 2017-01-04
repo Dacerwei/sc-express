@@ -11,16 +11,16 @@ var newAcount = require('./routes/newAcount');
 var buildSmartContract = require('./routes/buildSmartContract');
 var send = require('./routes/send');
 var getBalance = require('./routes/getBalance');
-var Web3 = require('web3');
+//var Web3 = require('web3');
 
 var app = express();
 
-if (typeof web3 !== 'undefined') {
-  web3 = new Web3(web3.currentProvider);
-} else {
-  // set the provider you want from Web3.providers
-  web3 = new Web3(new Web3.providers.HttpProvider("http://104.210.155.28:8000"));
-}
+// if (typeof web3 !== 'undefined') {
+//   web3 = new Web3(web3.currentProvider);
+// } else {
+//   // set the provider you want from Web3.providers
+//   web3 = new Web3(new Web3.providers.HttpProvider("http://104.210.155.28:8000"));
+// }
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
