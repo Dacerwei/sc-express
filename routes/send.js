@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
 	var amount = req.param('amount');
 	var smartContractAddress = req.param('smartContractAddress');
 
+
 	web3.personal.unlockAccount(payerAddress,"test2");
 	var dealContract = web3.eth.contract([
 	{
