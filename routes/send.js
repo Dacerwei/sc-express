@@ -1,12 +1,67 @@
 var express = require('express');
 var router = express.Router();
+var Web3 = require('web3');
+
+if (typeof web3 !== 'undefined') {
+  web3 = new Web3(web3.currentProvider);
+} else {
+  // set the provider you want from Web3.providers
+  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7999"));
+}
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 	var payerAddress = req.param('payerAddress');
 	var amount = req.param('amount');
 	var smartContractAddress = req.param('smartContractAddress');
-	res.send('send');
+
+	web3.personal.unlockAccount(payerAddress,"test2");
+	var dealContract = web3.eth.contract([
+	{
+		"constant":true,"inputs":[],
+		"name":"accumulated_payment",
+		"outputs":[{"name":"","type":"uint256"}],
+		"payable":false,
+		"type":"function"
+	},
+	{
+		"constant":true,
+		"inputs":[],
+		"name":"num_people",
+		"outputs":[{"name":"","type":"uint256"}],
+		"payable":false,
+		"type":"function"
+	},
+	{
+		"constant":true,
+		"inputs":[],
+		"name":"totalamount",
+		"outputs":[{"name":"","type":"uint256"}],
+		"payable":false,
+		"type":"function"
+	},
+	{
+		"constant":false,
+		"inputs":[{"name":"money","type":"uint256"}],
+		"name":"pay",
+		"outputs":[{"name":"","type":"uint256"}],
+		"payable":true,
+		"type":"function"
+	},
+	{
+		"inputs":[{"name":"amount","type":"uint256"},{"name":"people","type":"uint256"}],
+		"payable":false,
+		"type":"constructor"
+	}
+	]);
+
+	var theDeal = dealContract.at(smartContractAddress);
+	theDeal.pay.sendTransaction(web3.toWei(100,"ether"),{from:payerAddress, value:web3.toWei(80,"ether")});
+	res.json({
+		"state": true,
+		"accumulated_payment": theDeal.accumulated_payment()
+	});
+
 });
 
 module.exports = router;
