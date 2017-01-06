@@ -64,9 +64,7 @@ router.get('/', function(req, res, next) {
 		console.log(e, 'contarct build');
 		if (typeof contract.address !== 'undefined') {
 			res.json({
-				'state':'Contract mined!',
-				'contract address': contract.address,
-				' transactionHash': contract.transactionHash
+				'smartContractAddress': contract.address
 			});
 		}
 	});
