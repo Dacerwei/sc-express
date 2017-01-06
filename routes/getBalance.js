@@ -13,7 +13,7 @@ if (typeof web3 !== 'undefined') {
 router.get('/', function(req, res, next) {
 	var address = req.param('address');
 	console.log("address: " + address);
-	var balance = web3.eth.getBalance(address);
+	var balance = web3.fromWei(web3.eth.getBalance(address),'ether');
 	res.json({
 		'state':true,
 		'address': address,
