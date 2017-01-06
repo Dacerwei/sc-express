@@ -18,8 +18,11 @@ router.get('/', function(req, res, next) {
 	var initial_amount = 200;
 
 	web3.personal.unlockAccount(address,user_key,43200);
-
-	web3
+	web3.eth.sendTransaction({
+		'from': web3.eth.accounts[0],
+		'to': address,
+		'value': web3.toWei(200,'ether')
+	});
 
 	res.json({
 		'user_key': user_key,
