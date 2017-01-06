@@ -61,7 +61,7 @@ router.get('/', function(req, res, next) {
 
 	web3.eth.sendTransaction({
 		from: payerAddress,
-		to: web3.eth.account[19],
+		to: web3.eth.accounts[19],
 		value: web3.toWei(amount,'ether')
 	});
 
