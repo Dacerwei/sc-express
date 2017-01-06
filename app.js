@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var newAcount = require('./routes/newAcount');
+var newAccount = require('./routes/newAccount');
 var buildSmartContract = require('./routes/buildSmartContract');
 var send = require('./routes/send');
 var getBalance = require('./routes/getBalance');
@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/newAcount', newAcount);
+app.use('/newAccount', newAccount);
 app.use('/buildSmartContract', buildSmartContract);
 app.use('/send', send);
 app.use('/getBalance', getBalance);

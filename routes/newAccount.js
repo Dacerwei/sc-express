@@ -9,15 +9,23 @@ if (typeof web3 !== 'undefined') {
   web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8000"));
 }
 
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-	var address = req.param('address');
-	console.log("address: " + address);
-	var balance = web3.eth.getBalance(address);
+	var user_key = req.param('user_key');
+	var address = web3.personal.newAccount(user_key);
+	var index = web3.eth.accounts.length -1;
+	var initial_amount = 200;
+
+	web3.personal.unlockAccount(address,user_key,43200);
+
+	web3
+
 	res.json({
-		'state':true,
+		'user_key': user_key,
 		'address': address,
-		'amount': balance,
+		'account_index': index,
+		'initial_amount': initial_amount
 	});
 });
 
