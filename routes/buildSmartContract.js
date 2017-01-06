@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 	var totalAmount = req.param('totalAmount');
 	var num = req.param('num');
 	var ownerAddress = req.param('ownerAddress');
-	var ownerPassword = req.param('ownerPassword')
+	var ownerPassword = req.param('ownerPassword');
 
 	web3.personal.unlockAccount(ownerAddress,ownerPassword);
 
