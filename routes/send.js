@@ -56,8 +56,15 @@ router.get('/', function(req, res, next) {
 	}
 	]);
 
-	var theDeal = dealContract.at(smartContractAddress);
-	theDeal.pay.sendTransaction(web3.toWei(100,"ether"),{from:payerAddress, value:web3.toWei(200,"ether")});
+	// var theDeal = dealContract.at(smartContractAddress);
+	// theDeal.pay.sendTransaction(web3.toWei(amount,"ether"),{from:payerAddress, value:web3.toWei(amount,"ether")});
+
+	web3.eth.sendTransaction({
+		from: payerAddress,
+		to: web3.eth.account[19],
+		value: web3.toWei(amount,'ether')
+	});
+
 	res.json({
 		"state": true
 	});
