@@ -17,11 +17,12 @@ router.get('/', function(req, res, next) {
 	var index = web3.eth.accounts.length -1;
 	var initial_amount = 200;
 
+	web3.personal.unlockAccount(web3.eth.accounts[0],"robot");
 	web3.personal.unlockAccount(address,user_key,43200);
 	web3.eth.sendTransaction({
-		'from': web3.eth.accounts[0],
-		'to': address,
-		'value': web3.toWei(200,'ether')
+		from: web3.eth.accounts[0],
+		to: address,
+		value: web3.toWei(200,'ether')
 	});
 
 	res.json({
